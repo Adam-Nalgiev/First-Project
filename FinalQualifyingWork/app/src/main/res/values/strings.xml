@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Final_Work</string>
+    <string name="title_activity_onboarding">Onboarding</string>
+    <string name="next">Next</string>
+
+    <string name="onboarding_first_text_greetings">Welcome to the Rabbit!</string>
+    <string name="onboarding_first_text">Communities of various interests are gathered here</string>
+    <string name="onboarding_second_text_title">SubRabbit</string>
+    <string name="onboarding_second_text">Here is you can find Sub\'s for your interests</string>
+    <string name="onboarding_third_text_title">Share and save</string>
+    <string name="onboarding_third_text">Tab "Selected" saving tabs with your comments and subs. In the profile you can find information about yourself</string>
+    <string name="reg_text">So, shall we begin?</string>
+    <string name="authorization">Authorization</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
+    <string name="title_subreddits">Subreddits</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="title_profile">Profile</string>
+    <string name="new_subreddits">New</string>
+    <string name="popular_subreddits">Popular</string>
+    <string name="add_to_friends">Add to a friends</string>
+    <string name="remove_friend">Remove from friend\'s list</string>
+    <string name="comments">Comments</string>
+    <string name="comments_">Comments:</string>
+    <string name="subs_">Subreddits: </string>
+    <string name="saved">Saved</string>
+    <string name="friends_list">Friends list</string>
+    <string name="clear_saved">Clear saved data</string>
+    <string name="all">All</string>
+    <string name="exit">Exit</string>
+</resources>
