@@ -6,18 +6,24 @@ import com.nadev.finalwork.entity.TokenResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RegAPI {
-    @POST("/access_token")
+    @Headers(
+        "Authorization: username iJ8fYppvhHxCZ1h3185IaQ",
+        "Authorization: password"
+    )
+    @POST("access_token")
     suspend fun getAccessToken(
-        @Path("grant_type") grant_type: String,
-        @Path("code") code: String,
-        @Path("redirect_uri") redirect_uri: String
+        @Query("grant_type") grant_type: String,
+        @Query("code") code: String,
+        @Query("redirect_uri") redirect_uri: String
     ): TokenResponse
 
-    @POST("/access_token")
+    @POST("access_token")
     suspend fun refreshToken(
         @Path("grant_type") grant_type: String,
         @Path("refresh_token") refresh_token: String,
@@ -25,14 +31,15 @@ interface RegAPI {
 }
 
 interface API {
-    @GET("/users/popular")
-    suspend fun getNewSubreddits() : List<SubredditsPreview>
 
-  //  @GET("/api/v1/me")
-  //  suspend fun getMyProfile():MyProfile
+    @GET("users/popular")
+    suspend fun getNewSubreddits(): List<SubredditsPreview>
+
+    //  @GET("/api/v1/me")
+    //  suspend fun getMyProfile():MyProfile
 
     //@GET("/prefs/friends")
-   // suspend fun getFriendsList(): List<Friends>
+    // suspend fun getFriendsList(): List<Friends>
 
     //@GET
 
@@ -49,7 +56,7 @@ GET /users/
 → /users/new*/
 
 val retrofitReg: RegAPI = Retrofit.Builder()
-    .baseUrl("https://www.reddit.com/api/v1")
+    .baseUrl("https://www.reddit.com/api/v1/")
     .addConverterFactory(GsonConverterFactory.create())
     .build()
     .create(RegAPI::class.java)

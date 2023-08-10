@@ -15,11 +15,12 @@ import kotlinx.coroutines.launch
 
 const val IS_AUTHORIZED = "isAuthorized"
 const val TOKEN = "Access Token"
-
+const val client_id = "iJ8fYppvhHxCZ1h3185IaQ"
+var accessToken = ""
 class RegistrationActivity : AppCompatActivity() {
     private var refreshToken = ""
     private var authorCode = ""
-    private var accessToken = ""
+
     private val preferenceEditor = preferences.edit()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,6 @@ class RegistrationActivity : AppCompatActivity() {
         b.authButton.setOnClickListener {
             openBrowser()
         }
-        val intent = Intent(Intent.ACTION_VIEW, composeUrl())
         handleDeepLink(intent)
     }
 
@@ -51,14 +51,16 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun composeUrl(): Uri =
-        Uri.parse("https://old.reddit.com/api/v1/authorize")
+        Uri.parse("https://www.reddit.com/api/v1/authorize")
             .buildUpon()
-            .appendQueryParameter("client_id", "iJ8fYppvhHxCZ1h3185IaQ")
+            .appendQueryParameter("client_id", client_id)
             .appendQueryParameter("response_type", "code")
             .appendQueryParameter("state", "finalpracticeworkapp")
             .appendQueryParameter("redirect_uri", "com.nadev.finalwork://auth")
             .appendQueryParameter("duration", "permanent")
-            .appendQueryParameter("scope", "identity, read, subscribe, vote, history, mysubreddits")
+            .appendQueryParameter("scope", "identity edit flair history modconfig modflair modlog " +
+                    "modposts modwiki mysubreddits privatemessages read report save submit subscribe " +
+                    "vote wikiedit wikiread")
             .build()
 
     private fun handleDeepLink(intent: Intent) {
@@ -71,19 +73,15 @@ class RegistrationActivity : AppCompatActivity() {
         Log.d("DEEPLINKURL", intent.dataString!!)
         Log.d("IS CONTAINS CODE", deepLinkUrl.getQueryParameter("code").toString())
         authorCode = deepLinkUrl.getQueryParameter("code") ?: return
-        Log.d("TOKEN", "$authorCode  is token")
         getToken()
     }
 
     private fun getToken() {
         Log.d("GET TOKEN PROCESS", "GET TOKEN PROCESS STARTED")
         lifecycleScope.launch {
+            Log.d("CODE", authorCode)
             kotlin.runCatching {
-                retrofitReg.getAccessToken(
-                    "authorization_code",
-                    authorCode,
-                    "com.nadev.finalwork://auth"
-                )
+                retrofitReg.getAccessToken(grant_type = "authorization_code", code = authorCode, redirect_uri = "com.nadev.finalwork://auth")
             }.fold(
                 onSuccess = {
                     Log.d("GET TOKEN PROCESS", it.access_token)
@@ -96,8 +94,9 @@ class RegistrationActivity : AppCompatActivity() {
                     startActivity(intentToNext)
                 },
                 onFailure = {
-                    refreshToken(accessToken)
-                    Log.d("ERROR", "ERROR OF GET TOKEN PROCESS")
+                //    refreshToken(accessToken)
+                    Log.d("ERROR", "ERROR OF GET TOKEN PROCESS ${it.message}")
+                    Log.d("ERROR", "$it")
                 }
             )
         }
