@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.nadev.finalwork.R
 import com.nadev.finalwork.databinding.ProfileFragmentBinding
-var friendsListId = "" //на случай если придется передавть данные для запроса списка
+
 class ProfileFragment : Fragment() {
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
@@ -30,14 +30,15 @@ class ProfileFragment : Fragment() {
 
         val profile = profileViewModel.getProfile()
         Log.d("Profile", profile.toString())
-        Glide.with(binding.profilePhoto).load(profile.iconImg).into(binding.profilePhoto)
+
+        Glide.with(binding.profilePhoto).load(profile.iconImg).circleCrop().into(binding.profilePhoto)
 
         binding.name.text = profile.name
         binding.username.text = profile.id
         binding.commentsCount.text = profile.commentKarma.toString()
         binding.subredditsCount.text = profile.subreddit?.subscribers.toString() //да там же нет таких переменных
+
         binding.friendsListButton.setOnClickListener{
-            friendsListId = ""
             findNavController().navigate(R.id.action_navigation_profile_to_friendsListFragment)
         }
 

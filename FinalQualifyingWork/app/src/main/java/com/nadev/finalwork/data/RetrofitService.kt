@@ -1,5 +1,6 @@
 package com.nadev.finalwork.data
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.nadev.finalwork.data.models.RefreshTokenResponse
 import com.nadev.finalwork.data.models.TokenResponse
@@ -14,6 +15,7 @@ import com.nadev.finalwork.ui.registration.accessToken
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -117,9 +119,20 @@ interface API {
     suspend fun addToFriends(
         @Header("Authorization") request: String? = "Bearer $accessToken",
         @Path("username") username: String,
-        @Body requestBody: String,
+        @Body requestBody: String
     )
 
+    @GET("user/{username}/where")
+    suspend fun getUsersComments(
+        @Header("Authorization") request: String? = "Bearer $accessToken",
+        @Path("username") username: String
+    )
+
+    @DELETE("api/v1/me/friends/{username}")
+    suspend fun removeFromFriends(
+        @Header("Authorization") request: String? = "Bearer $accessToken",
+        @Path("username") username: String
+    )
     @GET("user/{username}/about")
     suspend fun user(
         @Header("Authorization") request: String? = "Bearer $accessToken",
@@ -156,7 +169,7 @@ interface API {
 }
 
 
-var gson = GsonBuilder()
+var gson: Gson = GsonBuilder()
     .setLenient()
     .create()
 
