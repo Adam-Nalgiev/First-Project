@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.nadev.finalwork.data.repository.retrofitReg
+import com.nadev.finalwork.data.retrofitReg
 import com.nadev.finalwork.databinding.RegistrationActivityBinding
 import com.nadev.finalwork.ui.mainActivity.MainActivity
 import com.nadev.finalwork.ui.onboarding.preferences
@@ -80,16 +80,16 @@ class RegistrationActivity : AppCompatActivity() {
     private fun getToken() {
         Log.d("GET TOKEN PROCESS", "GET TOKEN PROCESS STARTED")
         lifecycleScope.launch {
+            Log.d("CODE", authorCode)
             val authString = "${client_id}:${""}"
             val encodedString = Base64.encodeToString(authString.toByteArray(), Base64.NO_WRAP)
-            Log.d("CODE", authorCode)
             kotlin.runCatching {
-                retrofitReg.getAccessToken(clientId = "Basic $encodedString", grantType = "authorization_code", code = authorCode, redirectUri = "com.nadev.finalwork://auth")
+                retrofitReg.getAccessToken(clientId =  "Basic $encodedString", grantType = "authorization_code", code = authorCode, redirectUri = "com.nadev.finalwork://auth")
             }.fold(
                 onSuccess = {
-                    Log.d("GET TOKEN PROCESS", it.access_token)
                     refreshToken = it.refresh_token
-                    accessToken = it.access_token
+                    accessToken = it.access_token  //Base64.decode(it.access_token, Base64.NO_WRAP).toString()
+                    Log.d("GET TOKEN PROCESS", accessToken)
                     preferenceEditor.putBoolean(IS_AUTHORIZED, true)
                     preferenceEditor.putString(TOKEN, accessToken)
                     preferenceEditor.apply()
@@ -97,9 +97,8 @@ class RegistrationActivity : AppCompatActivity() {
                     startActivity(intentToNext)
                 },
                 onFailure = {
-                //    refreshToken(accessToken)
+                    //    refreshToken(accessToken)
                     Log.d("ERROR", "ERROR OF GET TOKEN PROCESS ${it.message}")
-                    Log.d("ERROR", "$it")
                 }
             )
         }

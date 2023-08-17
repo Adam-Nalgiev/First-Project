@@ -8,39 +8,64 @@
     android:animateLayoutChanges="true"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:background="@drawable/subreddits_style">
 
     <TextView
         android:id="@+id/topic"
-        style="@style/basic_text_style"
+        style="@style/bold_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:text="@null"
-        app:layout_constraintBottom_toTopOf="@+id/comments_icon"
         app:layout_constraintEnd_toStartOf="@id/subscribe"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:visibility="gone"
+        android:id="@+id/description_preview"
+        style="@style/basic_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="300dp"
+        android:text="@null"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/share_button"
+        app:layout_constraintEnd_toStartOf="@+id/subscribe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topic" />
+
+    <TextView
         android:id="@+id/description"
         style="@style/basic_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="@null"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@id/subscribe"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/light_blue"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxWidth="300dp"
+        android:text="@null"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/share_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topic" />
 
-    <ImageView
+  <!--  <ImageView
         android:id="@+id/comments_icon"
         android:layout_width="20dp"
         android:layout_height="20dp"
@@ -49,28 +74,27 @@
         android:src="@drawable/comments_icon_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/subscribe"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" /> -->
 
     <ImageView
         android:id="@+id/share_button"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="64dp"
         android:clickable="true"
         android:src="@drawable/baseline_share_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/subscribe"
-        app:layout_constraintStart_toEndOf="@+id/comments_icon"
-        app:layout_constraintTop_toBottomOf="@+id/subscribe" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/subscribe"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
-        app:layout_constraintBottom_toTopOf="@+id/comments_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -99,7 +123,7 @@
         android:layout_width="match_parent"
         android:id="@+id/comments_bar"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/comments_icon"
+        app:layout_constraintTop_toBottomOf="@id/share_button"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="8dp">
 

@@ -18,14 +18,14 @@ class OnboardingActivity : AppCompatActivity() {
     private val listOfFragment = listOf(R.drawable.first_page, R.drawable.second_page, R.drawable.third_page)
     private var currentPage = 0
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         preferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
         val authored = preferences.getBoolean(IS_AUTHORIZED, false)
-        val b = OnboardingActivityBinding.inflate(layoutInflater)
         if (authored){
             val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)
         }
+        super.onCreate(savedInstanceState)
+        val b = OnboardingActivityBinding.inflate(layoutInflater)
         supportActionBar?.hide()
         setContentView(b.root)
         b.secondPoint.animate().alpha(0.4f).duration = 100

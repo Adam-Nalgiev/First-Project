@@ -3,28 +3,84 @@ package com.nadev.finalwork.ui.mainActivity.fragments.subreddits
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nadev.finalwork.entity.SubredditsPreview
+import com.nadev.finalwork.data.models.subreddit.Children
+import com.nadev.finalwork.data.retrofit
+import com.nadev.finalwork.data.models.PageTypes
+import com.nadev.finalwork.data.models.posts.comments.Comment
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SubredditsViewModel : ViewModel() {
-    private var _subsFlow = MutableStateFlow<List<SubredditsPreview>>(emptyList())
+    private var _subsFlow = MutableStateFlow<ArrayList<Children>?>(arrayListOf())
     val subsFlow = _subsFlow.asStateFlow()
 
+    private var _commentsFlow = MutableStateFlow<ArrayList<Comment>?>(arrayListOf())
+    val commentsFlow = _commentsFlow.asStateFlow()
     init {
-        setSubs()
+        setSubs(PageTypes.NewSubs)
     }
 
-    private fun setSubs() {
+    fun setSubs(activePage: PageTypes){
+        if (activePage == PageTypes.PopularSubs){
+            setPopularSubs()
+        }else{
+            setNewSubs()
+        }
+    }
+
+    private fun setNewSubs() {
         viewModelScope.launch {
             runCatching {
-       //         retrofit.getNewSubreddits()
+                retrofit.getNewSubreddits()
             }.fold(onSuccess = {
-                Log.d("GET SUBS PROCESS", "GET SUBS IS SUCCESS")
-         //       _subsFlow.value = it
+                Log.d("GET SUBS PROCESS", "GET SUBS IS SUCCESS $it")
+                _subsFlow.value = arrayListOf()
+                _subsFlow.value = it.data?.children
             },
-                onFailure = { Log.d("GET SUBS PROCESS", "GET SUBS IS FAILURE") })
+                onFailure = { Log.d("GET SUBS PROCESS", "GET SUBS IS FAILURE $it") })
+        }
+    }
+
+    private fun setPopularSubs(){
+        viewModelScope.launch {
+            runCatching {
+                retrofit.getPopularSubreddits()
+            }.fold(onSuccess = {
+                Log.d("GET SUBS PROCESS", "GET Popular SUBS IS SUCCESS")
+                _subsFlow.value = arrayListOf()
+                _subsFlow.value = it.data?.children
+            },
+                onFailure = { Log.d("GET SUBS PROCESS", "GET popular SUBS IS FAILURE") })
+        }
+    }
+
+    fun setFoundSubs(requestText:String){
+        viewModelScope.launch {
+            kotlin.runCatching {
+                retrofit.searchSubreddits(q = requestText)
+            }.fold(
+                onSuccess = {
+                    _subsFlow.value = arrayListOf()
+                    _subsFlow.value = it.data?.children
+                },
+                onFailure = {
+                    Log.d("FAILURE", "FAILURE GET FOUND SUBS PROCESS")
+                }
+            )
+        }
+    }
+
+    fun setComments(id:String){
+        viewModelScope.launch {
+            kotlin.runCatching {
+                retrofit.getPostComments(post = id)
+            }.fold(
+                onFailure = {Log.d("ERROR", "GET COMMENTS PROCESS IS FAILURE")},
+                onSuccess = {
+                    _commentsFlow.value = it.commentsResponse.data?.children
+                }
+            )
         }
     }
 }

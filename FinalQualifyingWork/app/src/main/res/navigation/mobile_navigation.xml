@@ -29,10 +29,19 @@
         android:id="@+id/navigation_profile"
         android:name="com.nadev.finalwork.ui.mainActivity.fragments.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_navigation_profile_to_friendsListFragment"
+            app:destination="@id/friendsListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/openedProfile"
-        android:name="com.nadev.finalwork.ui.openedProfile.OpenedProfile"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.openedProfile.OpenedProfile"
         android:label="opened_profile_fragment"
         tools:layout="@layout/opened_profile_fragment" />
+    <fragment
+        android:id="@+id/friendsListFragment"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.friendslist.FriendsListFragment"
+        android:label="friends_list_fragment"
+        tools:layout="@layout/friends_list_fragment" />
 </navigation>

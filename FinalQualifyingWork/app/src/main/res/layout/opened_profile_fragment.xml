@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/light_blue"
     android:animateLayoutChanges="true"
-    tools:context=".ui.openedProfile.OpenedProfile">
+    tools:context=".ui.mainActivity.fragments.openedProfile.OpenedProfile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profile"
