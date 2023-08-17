@@ -3,11 +3,12 @@ package com.nadev.finalwork.ui.registration
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.nadev.finalwork.data.retrofitReg
+import com.nadev.finalwork.data.repository.retrofitReg
 import com.nadev.finalwork.databinding.RegistrationActivityBinding
 import com.nadev.finalwork.ui.mainActivity.MainActivity
 import com.nadev.finalwork.ui.onboarding.preferences
@@ -79,9 +80,11 @@ class RegistrationActivity : AppCompatActivity() {
     private fun getToken() {
         Log.d("GET TOKEN PROCESS", "GET TOKEN PROCESS STARTED")
         lifecycleScope.launch {
+            val authString = "${client_id}:${""}"
+            val encodedString = Base64.encodeToString(authString.toByteArray(), Base64.NO_WRAP)
             Log.d("CODE", authorCode)
             kotlin.runCatching {
-                retrofitReg.getAccessToken(grant_type = "authorization_code", code = authorCode, redirect_uri = "com.nadev.finalwork://auth")
+                retrofitReg.getAccessToken(clientId = "Basic $encodedString", grantType = "authorization_code", code = authorCode, redirectUri = "com.nadev.finalwork://auth")
             }.fold(
                 onSuccess = {
                     Log.d("GET TOKEN PROCESS", it.access_token)

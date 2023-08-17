@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.nadev.finalwork.data.retrofit
+import com.nadev.finalwork.data.repository.retrofit
 import com.nadev.finalwork.databinding.SubredditsFragmentBinding
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -75,12 +75,12 @@ class SubredditsFragment : Fragment() {
             }.start()
         }
         viewLifecycleOwner.lifecycleScope.launch {
-            val subs = retrofit.getNewSubreddits()
-            subredditsAdapter.setData(subs)
-            binding.newSubsRecycler.adapter = subredditsAdapter
-            subredditsViewModel.subsFlow.onEach{
-                subredditsAdapter.setData(it)
-            }
+        //    val subs = retrofit.getPopularSubreddits()
+        //    subredditsAdapter.setData(subs)
+        //    binding.newSubsRecycler.adapter = subredditsAdapter
+        //    subredditsViewModel.subsFlow.onEach{
+         //       subredditsAdapter.setData(it)
+        //    }
         }
     }
     override fun onDestroyView() {
