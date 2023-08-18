@@ -7,12 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.nadev.finalwork.R
 import com.nadev.finalwork.databinding.FriendsListFragmentBinding
-import com.nadev.finalwork.databinding.ProfileFragmentBinding
 import com.nadev.finalwork.ui.mainActivity.fragments.profile.FriendsListAdapter
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class FriendsListFragment : Fragment() {
@@ -30,10 +26,15 @@ class FriendsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.friendsListRecycler.adapter = friendsListAdapter
         viewLifecycleOwner.lifecycleScope.launch {
+            binding.friendsListRecycler.adapter = friendsListAdapter
             listViewModel.listFlow.collect{
                 friendsListAdapter.setData(it)
+                if (it != null && it.isEmpty()){
+                    binding.noFriends.visibility = View.VISIBLE
+                }else{
+                    binding.noFriends.visibility = View.GONE
+                }
             }
         }
     }

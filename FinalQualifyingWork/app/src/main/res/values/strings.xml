@@ -27,4 +27,7 @@
     <string name="clear_saved">Clear saved data</string>
     <string name="all">All</string>
     <string name="exit">Exit</string>
+    <string name="no_friends">No friends here</string>
+    <string name="share">Share to:</string>
+    <string name="no_comments">No comments here</string>
 </resources>

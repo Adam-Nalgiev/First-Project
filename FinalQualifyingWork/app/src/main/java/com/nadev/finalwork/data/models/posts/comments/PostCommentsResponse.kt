@@ -5,5 +5,5 @@ import com.nadev.finalwork.data.models.posts.comments.CommentsResponse
 
 class PostCommentsResponse(
     val subredditPostsResponse: SubredditPostsResponse,
-    val commentsResponse: CommentsResponse
+    val commentsResponse: CommentsResponse?
 )

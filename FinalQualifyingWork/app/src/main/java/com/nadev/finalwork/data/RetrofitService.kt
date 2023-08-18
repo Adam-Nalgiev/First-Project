@@ -62,6 +62,7 @@ interface API {
         @Query("skip_initial_defaults") skipInitialDefaults: Boolean = false,
         @Query("sr") sr: String
     )
+
     @POST("api/subscribe")
     suspend fun unsubscribe(
         @Header("Authorization") request: String? = "Bearer $accessToken",
@@ -71,16 +72,16 @@ interface API {
         @Query("sr") sr: String
     )
 
-    @GET("r/{subreddit}")
-    suspend fun getSubredditPosts(
+    @GET("r/{subreddit}/about")
+    suspend fun getSubreddit(
         @Header("Authorization") request: String? = "Bearer $accessToken",
         @Path("subreddit") subreddit: String
     ): SubredditPostsResponse
 
-    @GET("comments/{post}")
-    suspend fun getPostComments(
+    @GET("r/{subreddit}/comments")
+    suspend fun getSubsComments(
         @Header("Authorization") request: String? = "Bearer $accessToken",
-        @Path("post") post: String
+        @Path("subreddit") subreddit: String
     ): PostCommentsResponse
 
     @GET("subreddits/search")
@@ -151,7 +152,6 @@ interface API {
     suspend fun getSavedComments(
         @Header("Authorization") request: String? = "Bearer $accessToken",
         @Path("username") username: String,
-        @Query("after") page: String
     ): String
 
     @POST("api/save")

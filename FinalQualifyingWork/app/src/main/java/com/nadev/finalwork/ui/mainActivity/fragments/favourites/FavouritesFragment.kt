@@ -18,13 +18,8 @@ class FavouritesFragment : Fragment() {
     private var _binding: FavouritesFragmentBinding? = null
     private val binding get() = _binding!!
     private val favouritesViewModel: FavouritesViewModel by viewModels()
-    private var isComsSelected = false
-    private var isSubsSelected = false
-    private var isSavedSelected = false
-  //  val subsAdapter = AdapterSubreddits()
-    val commentsAdapter:CommentsAdapter = CommentsAdapter()
-    val savedAdapter = SavedAdapter()
-    var stateCode = 0
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +32,12 @@ class FavouritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tabs1.tabIndicatorAnimationMode = TabLayout.INDICATOR_ANIMATION_MODE_FADE
-       // binding.tabs1.setSelectedTabIndicatorColor(resources.getColor(R.color.main_lighter_blue))
+        binding.firstGroup.setOnCheckedChangeListener{ _, isChecked ->
+            if (!isChecked){
+
+            }
+        }
+
     }
 
     override fun onDestroyView() {

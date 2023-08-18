@@ -7,13 +7,26 @@
     android:background="@color/light_blue"
     tools:context=".ui.mainActivity.fragments.friendslist.FriendsListFragment">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:id="@+id/friends_list_recycler"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    app:spanCount="2"
-    android:orientation="vertical"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+    <TextView
+        android:id="@+id/no_friends"
+        android:visibility="gone"
+        style="@style/bold_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_friends"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/friends_list_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

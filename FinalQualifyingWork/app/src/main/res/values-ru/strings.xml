@@ -25,4 +25,7 @@
     <string name="exit">Выйти</string>
     <string name="comments_">Комменты:</string>
     <string name="subs_">Сабреддиты: </string>
+    <string name="no_friends">Cписок друзей пуст</string>
+    <string name="share">Поделиться:</string>
+    <string name="no_comments">Нет комментариев</string>
 </resources>

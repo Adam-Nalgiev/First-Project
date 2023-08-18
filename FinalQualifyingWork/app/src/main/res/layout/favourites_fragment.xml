@@ -7,82 +7,75 @@
     android:background="@color/light_blue"
     tools:context=".ui.mainActivity.fragments.favourites.FavouritesFragment">
 
-     <!--   <TableLayout
-            android:id="@+id/buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="8dp">
-            <TableRow
-                android:layout_margin="8dp">
-
-            </TableRow>
-
-            <TableRow
-                android:layout_margin="8dp">
-
-            </TableRow>
-
-        </TableLayout> -->
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs1"
-        android:layout_width="match_parent"
-        android:layout_margin="8dp"
-        android:background="@drawable/tabs_background_style"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/firstGroup"
+        android:layout_width="53dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:thumbTint="@color/main_lighter_blue"
+        app:trackTint="@color/white" />
 
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/subs_tab"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/comments_style"
-                android:text="@string/title_subreddits" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/comments_tab"
-                android:layout_width="100dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/comments_style"
-                android:text="@string/comments" />
-
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs2"
-        android:background="@drawable/tabs_background_style"
-        android:layout_width="match_parent"
+    <TextView
+        style="@style/bold_text_style"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:text="@string/title_subreddits"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/main_lighter_blue"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/firstGroup"
+        app:layout_constraintEnd_toStartOf="@+id/firstGroup"
+        app:layout_constraintTop_toTopOf="@+id/firstGroup" />
+
+    <TextView
+        style="@style/bold_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comments"
+        android:textSize="18sp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/main_lighter_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/firstGroup"
+        app:layout_constraintStart_toEndOf="@+id/firstGroup"
+        app:layout_constraintTop_toTopOf="@+id/firstGroup" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/secondGroup"
+        android:layout_width="53dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs1">
+        app:layout_constraintTop_toBottomOf="@+id/firstGroup"
+        app:thumbTint="@color/main_lighter_blue"
+        app:trackTint="@color/white" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/all_tab"
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/comments_style"
-            android:text="@string/all" />
+    <TextView
+        style="@style/bold_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all"
+        android:textColor="@color/main_lighter_blue"
+        android:textSize="18sp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/secondGroup"
+        app:layout_constraintEnd_toStartOf="@+id/secondGroup"
+        app:layout_constraintTop_toTopOf="@+id/secondGroup" />
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/Saved_tab"
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/comments_style"
-            android:text="@string/saved" />
-
-    </com.google.android.material.tabs.TabLayout>
+    <TextView
+        style="@style/bold_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saved"
+        android:textSize="18sp"
+        android:textColor="@color/main_lighter_blue"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/secondGroup"
+        app:layout_constraintStart_toEndOf="@+id/secondGroup"
+        app:layout_constraintTop_toTopOf="@+id/secondGroup" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFavourites"
@@ -94,6 +87,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabs2" />
+        app:layout_constraintTop_toBottomOf="@+id/secondGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,6 @@ class SubredditsViewModel : ViewModel() {
     private var _subsFlow = MutableStateFlow<ArrayList<Children>?>(arrayListOf())
     val subsFlow = _subsFlow.asStateFlow()
 
-    private var _commentsFlow = MutableStateFlow<ArrayList<Comment>?>(arrayListOf())
-    val commentsFlow = _commentsFlow.asStateFlow()
     init {
         setSubs(PageTypes.NewSubs)
     }
@@ -66,19 +64,6 @@ class SubredditsViewModel : ViewModel() {
                 },
                 onFailure = {
                     Log.d("FAILURE", "FAILURE GET FOUND SUBS PROCESS")
-                }
-            )
-        }
-    }
-
-    fun setComments(id:String){
-        viewModelScope.launch {
-            kotlin.runCatching {
-                retrofit.getPostComments(post = id)
-            }.fold(
-                onFailure = {Log.d("ERROR", "GET COMMENTS PROCESS IS FAILURE")},
-                onSuccess = {
-                    _commentsFlow.value = it.commentsResponse.data?.children
                 }
             )
         }

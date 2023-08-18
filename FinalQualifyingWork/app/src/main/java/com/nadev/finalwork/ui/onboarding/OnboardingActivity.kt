@@ -10,6 +10,8 @@ import com.nadev.finalwork.databinding.OnboardingActivityBinding
 import com.nadev.finalwork.ui.mainActivity.MainActivity
 import com.nadev.finalwork.ui.registration.IS_AUTHORIZED
 import com.nadev.finalwork.ui.registration.RegistrationActivity
+import com.nadev.finalwork.ui.registration.TOKEN
+import com.nadev.finalwork.ui.registration.accessToken
 import kotlinx.coroutines.launch
 const val PREFERENCE_NAME = "App_Preference"
 lateinit var preferences: SharedPreferences
@@ -20,6 +22,7 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         preferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE)
         val authored = preferences.getBoolean(IS_AUTHORIZED, false)
+        accessToken = preferences.getString(TOKEN, "")!!
         if (authored){
             val mainIntent = Intent(this, MainActivity::class.java)
             startActivity(mainIntent)

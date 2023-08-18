@@ -1,11 +1,13 @@
 package com.nadev.finalwork.data.models.me
 
-import com.google.gson.annotations.SerializedName
-
-
 data class MeResponse (
+    val id:String?,
+    val name:String?,
+    val icon_img:String?,
+    val comment_karma:Int?,
+    val subreddit: Subreddit?
 
-    @SerializedName("is_employee"                ) var isEmployee              : Boolean?          = null,
+  /*  @SerializedName("is_employee"                ) var isEmployee              : Boolean?          = null,
     @SerializedName("seen_layout_switch"         ) var seenLayoutSwitch        : Boolean?          = null,
     @SerializedName("has_visited_new_profile"    ) var hasVisitedNewProfile    : Boolean?          = null,
     @SerializedName("pref_no_profanity"          ) var prefNoProfanity         : Boolean?          = null,
@@ -70,6 +72,6 @@ data class MeResponse (
     @SerializedName("accept_followers"           ) var acceptFollowers         : Boolean?          = null,
     @SerializedName("has_subscribed"             ) var hasSubscribed           : Boolean?          = null,
     @SerializedName("linked_identities"          ) var linkedIdentities        : ArrayList<String> = arrayListOf(),
-    @SerializedName("seen_subreddit_chat_ftux"   ) var seenSubredditChatFtux   : Boolean?          = null
+    @SerializedName("seen_subreddit_chat_ftux"   ) var seenSubredditChatFtux   : Boolean?          = null*/
 
 )

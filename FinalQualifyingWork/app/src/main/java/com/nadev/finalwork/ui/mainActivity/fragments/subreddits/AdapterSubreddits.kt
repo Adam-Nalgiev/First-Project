@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.nadev.finalwork.data.models.subreddit.Children
 import com.nadev.finalwork.databinding.ModelSubredditsBinding
-import com.nadev.finalwork.ui.mainActivity.fragments.favourites.CommentsAdapter
 
 class AdapterSubreddits(private val subsClick: (String, String) -> Unit) :
     RecyclerView.Adapter<SubredditsViewHolder>() {
@@ -27,7 +26,6 @@ class AdapterSubreddits(private val subsClick: (String, String) -> Unit) :
 
     override fun onBindViewHolder(holder: SubredditsViewHolder, position: Int) {
         val item = subsList?.get(position)
-        holder.binding.commentsRecycler.adapter = CommentsAdapter()
         with(holder.binding) {
             item.let {
                 if (it?.data?.userIsSubscriber != null && it.data?.userIsSubscriber == true) {
@@ -39,13 +37,20 @@ class AdapterSubreddits(private val subsClick: (String, String) -> Unit) :
                 description.text = it?.data?.description
 
             }
-
         }
         holder.binding.root.setOnClickListener {
-            subsClick("showComs", "${item?.kind}")
             holder.binding.description.isVisible = holder.binding.description.visibility != View.VISIBLE
-            holder.binding.commentsBar.isVisible = holder.binding.commentsBar.visibility != View.VISIBLE
+            holder.binding.descriptionPreview.isVisible = !holder.binding.description.isVisible
         }
+
+        holder.binding.topic.setOnClickListener {
+            itemName = item?.data?.title.toString()
+            descr = item?.data?.description.toString()
+            img = item?.data?.bannerImg.toString()
+            itemID = item?.data?.name.toString()
+            subsClick("navigate", "${item?.data?.id}")
+        }
+
         holder.binding.subscribe.setOnClickListener {
             if (holder.binding.subscribeIcon.isVisible) {
                 holder.binding.unsubscribeIcon.visibility = View.VISIBLE

@@ -3,25 +3,33 @@ package com.nadev.finalwork.ui.mainActivity.fragments.subreddits
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.nadev.finalwork.databinding.SubredditsFragmentBinding
+import androidx.navigation.fragment.findNavController
+import com.nadev.finalwork.R
 import com.nadev.finalwork.data.models.PageTypes
 import com.nadev.finalwork.data.retrofit
+import com.nadev.finalwork.databinding.SubredditsFragmentBinding
 import com.nadev.finalwork.ui.mainActivity.fragments.favourites.CommentsAdapter
+import com.nadev.finalwork.ui.registration.accessToken
 import kotlinx.coroutines.launch
 
+var itemName = ""
+var descr = ""
+var img = ""
+var itemID = ""
 class SubredditsFragment : Fragment() {
 
     private var _binding: SubredditsFragmentBinding? = null
-    private val subredditsViewModel:SubredditsViewModel by viewModels ()
+    private val subredditsViewModel: SubredditsViewModel by viewModels()
     private val binding get() = _binding!!
-    private val subredditsAdapter = AdapterSubreddits{action, id -> onSubsClick(action, id)}
-    private val comsAdapter = CommentsAdapter()
+    private val subredditsAdapter = AdapterSubreddits { action, id -> onSubsClick(action, id) }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +42,7 @@ class SubredditsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.subsRecycler.adapter = subredditsAdapter
+        Log.d("TOKEN", accessToken)
         ObjectAnimator.ofArgb(
             binding.newButton,
             "textColor",
@@ -104,13 +113,26 @@ class SubredditsFragment : Fragment() {
         _binding = null
     }
     private fun onSubsClick(action:String, itemID:String){
+        Log.d("CLICK", "ITEM CLICK")
         lifecycleScope.launch {
-            if (action == "sub") {retrofit.subscribe(sr = itemID)}
-            else if (action == "unsub") { retrofit.unsubscribe(sr = itemID)}
-            else{
-                subredditsViewModel.commentsFlow.collect {
-                comsAdapter.setData(it)
-            } }
+            when (action) {
+                "sub" -> {
+                    kotlin.runCatching {
+                        retrofit.subscribe(sr = itemID)
+                    }
+                }
+
+                "unsub" -> {
+                    kotlin.runCatching {
+                        retrofit.unsubscribe(sr = itemID)
+                    }
+                }
+
+                "navigate" -> {
+                    findNavController().navigate(R.id.action_navigation_subreddits_to_openedSubredditFragment)
+                }
+
+            }
+            }
         }
     }
-}

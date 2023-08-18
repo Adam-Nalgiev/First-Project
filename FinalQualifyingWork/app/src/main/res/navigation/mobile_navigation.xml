@@ -11,8 +11,8 @@
         android:label="@string/title_subreddits"
         tools:layout="@layout/subreddits_fragment" >
         <action
-            android:id="@+id/action_navigation_subreddits_to_openedProfile"
-            app:destination="@id/openedProfile" />
+            android:id="@+id/action_navigation_subreddits_to_openedSubredditFragment"
+            app:destination="@id/openedSubredditFragment" />
     </fragment>
 
     <fragment
@@ -43,5 +43,18 @@
         android:id="@+id/friendsListFragment"
         android:name="com.nadev.finalwork.ui.mainActivity.fragments.friendslist.FriendsListFragment"
         android:label="friends_list_fragment"
-        tools:layout="@layout/friends_list_fragment" />
+        tools:layout="@layout/friends_list_fragment" >
+        <action
+            android:id="@+id/action_friendsListFragment_to_openedProfile"
+            app:destination="@id/openedProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/openedSubredditFragment"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.openedSub.OpenedSubredditFragment"
+        android:label="opened_subreddit_fragment"
+        tools:layout="@layout/opened_subreddit_fragment" >
+        <action
+            android:id="@+id/action_openedSubredditFragment_to_openedProfile"
+            app:destination="@id/openedProfile" />
+    </fragment>
 </navigation>

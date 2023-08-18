@@ -91,8 +91,8 @@ class RegistrationActivity : AppCompatActivity() {
                     accessToken = it.access_token  //Base64.decode(it.access_token, Base64.NO_WRAP).toString()
                     Log.d("GET TOKEN PROCESS", accessToken)
                     preferenceEditor.putBoolean(IS_AUTHORIZED, true)
-                    preferenceEditor.putString(TOKEN, accessToken)
-                    preferenceEditor.apply()
+                    preferenceEditor.putString(TOKEN, it.access_token)
+                    preferenceEditor.commit()
                     val intentToNext = Intent(this@RegistrationActivity, MainActivity::class.java)
                     startActivity(intentToNext)
                 },
