@@ -18,7 +18,6 @@ import com.nadev.finalwork.data.models.PageTypes
 import com.nadev.finalwork.data.models.saved.comments.CommentData
 import com.nadev.finalwork.data.retrofit
 import com.nadev.finalwork.databinding.OpenedSubredditFragmentBinding
-import com.nadev.finalwork.ui.mainActivity.fragments.favourites.CommentsAdapter
 import com.nadev.finalwork.ui.mainActivity.fragments.subreddits.descr
 import com.nadev.finalwork.ui.mainActivity.fragments.subreddits.img
 import com.nadev.finalwork.ui.mainActivity.fragments.subreddits.itemID

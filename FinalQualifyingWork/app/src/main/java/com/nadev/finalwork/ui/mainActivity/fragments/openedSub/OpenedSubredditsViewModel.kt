@@ -24,9 +24,9 @@ class OpenedSubredditsViewModel : ViewModel() {
                 retrofit.getSubsComments(subreddit = itemID)
             }.fold(
                 onFailure = { Log.d("SET COMMENTS", "SET COMMENTS IS FAILURE") }, onSuccess = {
-        //            Log.d("SET COMMENTS", "${it.commentsResponse.data?.children}")
-                    if (it.data != null && it.data?.children != null) {
-                        _commentsFlow.value = it.data?.children
+                    Log.d("SET COMMENTS", "${it.commentsResponse?.data?.children}")
+                    if (it.commentsResponse?.data != null && it.commentsResponse.data?.children != null) {
+                        _commentsFlow.value = it.commentsResponse.data?.children
                     }else{
                         _commentsFlow.value = null
                     }

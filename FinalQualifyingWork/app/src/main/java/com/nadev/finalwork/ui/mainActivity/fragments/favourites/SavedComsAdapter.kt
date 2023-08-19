@@ -1,15 +1,18 @@
 package com.nadev.finalwork.ui.mainActivity.fragments.favourites
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nadev.finalwork.data.models.CommentsDB
 import com.nadev.finalwork.databinding.ModelCommentsBinding
 
 class SavedAdapter: RecyclerView.Adapter<SavedViewHolder>() {
     private lateinit var bind: ModelCommentsBinding
-    private var savedList: List<String> = (emptyList())
+    private var savedList: List<CommentsDB> = (arrayListOf())
 
-    fun setData(data: List<String>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(data: List<CommentsDB>){
         this.savedList = data
         notifyDataSetChanged()
     }
@@ -25,7 +28,8 @@ class SavedAdapter: RecyclerView.Adapter<SavedViewHolder>() {
         val item = savedList[position]
         with(holder.binding){
             item.let {
-                //приделать здесь реализацию
+                name.text = it.name
+                description.text = it.description
             }
         }
     }

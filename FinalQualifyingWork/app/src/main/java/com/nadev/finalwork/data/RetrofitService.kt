@@ -7,7 +7,9 @@ import com.nadev.finalwork.data.models.TokenResponse
 import com.nadev.finalwork.data.models.friends.FriendsResponse
 import com.nadev.finalwork.data.models.me.MeResponse
 import com.nadev.finalwork.data.models.posts.SubredditPostsResponse
+import com.nadev.finalwork.data.models.posts.comments.CommentsResponse
 import com.nadev.finalwork.data.models.posts.comments.PostCommentsResponse
+import com.nadev.finalwork.data.models.saved.comments.SavedCommentsResponse
 import com.nadev.finalwork.data.models.saved.links.SavedLinksResponse
 import com.nadev.finalwork.data.models.subreddit.SubredditsResponse
 import com.nadev.finalwork.data.models.user_info.UserInfoResponse
@@ -144,15 +146,15 @@ interface API {
     @GET("user/{username}/saved?type=links")
     suspend fun getSavedPosts(
         @Header("Authorization") request: String? = "Bearer $accessToken",
-        @Path("username") username: String,
-        @Query("after") page: String
-    ): SavedLinksResponse
-
+        @Path("username") username:String,
+        @Query("after")page:String,
+        ): SavedLinksResponse
     @GET("user/{username}/saved?type=comments")
     suspend fun getSavedComments(
         @Header("Authorization") request: String? = "Bearer $accessToken",
-        @Path("username") username: String,
-    ): String
+        @Path("username") username:String,
+        @Query("after")page:String,
+        ): SavedCommentsResponse
 
     @POST("api/save")
     suspend fun saveThing(

@@ -77,6 +77,20 @@
         app:layout_constraintStart_toEndOf="@+id/secondGroup"
         app:layout_constraintTop_toTopOf="@+id/secondGroup" />
 
+    <TextView
+        android:id="@+id/empty"
+        style="@style/bold_text_style"
+        android:textColor="@color/main_lighter_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty"
+        android:layout_margin="24dp"
+        android:visibility="gone"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerFavourites" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFavourites"
         android:layout_width="match_parent"

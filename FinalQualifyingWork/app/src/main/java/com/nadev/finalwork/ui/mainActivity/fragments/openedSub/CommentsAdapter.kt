@@ -1,5 +1,6 @@
-package com.nadev.finalwork.ui.mainActivity.fragments.favourites
+package com.nadev.finalwork.ui.mainActivity.fragments.openedSub
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ class CommentsAdapter(val click:(PageTypes, String, CommentData) -> Unit): Recyc
     private var commentsList: ArrayList<Comment>? = (arrayListOf())
     private var time = ""
     private var counts = 0
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: ArrayList<Comment>?){
         this.commentsList = data
         notifyDataSetChanged()

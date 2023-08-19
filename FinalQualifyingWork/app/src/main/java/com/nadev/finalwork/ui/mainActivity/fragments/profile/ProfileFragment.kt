@@ -3,6 +3,7 @@ package com.nadev.finalwork.ui.mainActivity.fragments.profile
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.nadev.finalwork.App
 import com.nadev.finalwork.R
 import com.nadev.finalwork.databinding.ProfileFragmentBinding
 import com.nadev.finalwork.ui.onboarding.OnboardingActivity
@@ -24,7 +24,7 @@ class ProfileFragment : Fragment() {
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
     private val profileViewModel: ProfileViewModel by viewModels()
-    private val dao = (requireActivity().application as App).db.dao()
+ //   private val dao = (requireActivity().application as App).db.dao()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +45,7 @@ class ProfileFragment : Fragment() {
             Glide.with(binding.profilePhoto).load(profile.icon_img).circleCrop()
                 .into(binding.profilePhoto)
 
+            Log.d("USERNAME", "${profile.name}")
             binding.name.text = profile.name
             binding.username.text = "id: @${profile.id}"
             binding.commentsCount.text = profile.comment_karma.toString()
@@ -56,7 +57,7 @@ class ProfileFragment : Fragment() {
             }
             binding.exitButton.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    dao.deleteAll()
+            //        dao.deleteAll()
                     val cacheName = requireContext().cacheDir.name
                     requireContext().deleteFile(cacheName)
                     editor.clear()
@@ -68,7 +69,7 @@ class ProfileFragment : Fragment() {
             }
             binding.clearButton.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    dao.deleteAll()
+     //               dao.deleteAll()
                 }
             }
         }

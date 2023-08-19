@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:fontFamily="@font/roboto"
-        android:text="@null"
+        android:text="-"
         android:textColor="@color/main_lighter_blue"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/button_up"

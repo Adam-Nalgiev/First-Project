@@ -30,4 +30,5 @@
     <string name="no_friends">No friends here</string>
     <string name="share">Share to:</string>
     <string name="no_comments">No comments here</string>
+    <string name="empty">Empty</string>
 </resources>

@@ -15,7 +15,6 @@ import com.nadev.finalwork.R
 import com.nadev.finalwork.data.models.PageTypes
 import com.nadev.finalwork.data.retrofit
 import com.nadev.finalwork.databinding.SubredditsFragmentBinding
-import com.nadev.finalwork.ui.mainActivity.fragments.favourites.CommentsAdapter
 import com.nadev.finalwork.ui.registration.accessToken
 import kotlinx.coroutines.launch
 
