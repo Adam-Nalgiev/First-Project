@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_subreddits">
+
+    <fragment
+        android:id="@+id/navigation_subreddits"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.subreddits.SubredditsFragment"
+        android:label="@string/title_subreddits"
+        tools:layout="@layout/subreddits_fragment" >
+        <action
+            android:id="@+id/action_navigation_subreddits_to_openedSubredditFragment"
+            app:destination="@id/openedSubredditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favourites"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.favourites.FavouritesFragment"
+        android:label="@string/title_favourites"
+        tools:layout="@layout/favourites_fragment" >
+        <action
+            android:id="@+id/action_navigation_favourites_to_openedProfile"
+            app:destination="@id/openedProfile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_navigation_profile_to_friendsListFragment"
+            app:destination="@id/friendsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openedProfile"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.openedProfile.OpenedProfile"
+        android:label="opened_profile_fragment"
+        tools:layout="@layout/opened_profile_fragment" />
+    <fragment
+        android:id="@+id/friendsListFragment"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.friendslist.FriendsListFragment"
+        android:label="friends_list_fragment"
+        tools:layout="@layout/friends_list_fragment" >
+        <action
+            android:id="@+id/action_friendsListFragment_to_openedProfile"
+            app:destination="@id/openedProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/openedSubredditFragment"
+        android:name="com.nadev.finalwork.ui.mainActivity.fragments.openedSub.OpenedSubredditFragment"
+        android:label="opened_subreddit_fragment"
+        tools:layout="@layout/opened_subreddit_fragment" >
+        <action
+            android:id="@+id/action_openedSubredditFragment_to_openedProfile"
+            app:destination="@id/openedProfile" />
+    </fragment>
+</navigation>
